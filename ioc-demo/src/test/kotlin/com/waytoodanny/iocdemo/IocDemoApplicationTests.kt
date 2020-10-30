@@ -1,10 +1,10 @@
-package com.waytoodanny.ioccontainer
+package com.waytoodanny.iocdemo
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class IocContainerApplicationTests {
+class IocDemoApplicationTests {
 
     @Test
     fun contextLoads() {
