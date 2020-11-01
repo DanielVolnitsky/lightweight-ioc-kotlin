@@ -1,10 +1,9 @@
 package com.waytoodanny.iocdemo.domain
 
-import com.waytoodanny.iocdemo.domain.impl.CommonPoliceman
-import com.waytoodanny.iocdemo.domain.impl.ConsoleAnnouncer
+import com.waytoodanny.iocdemo.ObjectFactory
 
-class CoronaDisinfection(private val announcer: Announcer = ConsoleAnnouncer(),
-                         private val policeman: Policeman = CommonPoliceman()) {
+class CoronaDisinfection(private val announcer: Announcer = ObjectFactory.createObject(Announcer::class.java),
+                         private val policeman: Policeman = ObjectFactory.createObject(Policeman::class.java)) {
 
     fun start(room: Room) {
         announcer.announce("Everybody out!")
