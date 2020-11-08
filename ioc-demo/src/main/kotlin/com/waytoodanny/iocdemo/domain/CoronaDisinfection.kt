@@ -1,6 +1,6 @@
 package com.waytoodanny.iocdemo.domain
 
-import com.waytoodanny.iocdemo.ObjectFactory
+import com.waytoodanny.iocdemo.ioc.ObjectFactory
 
 class CoronaDisinfection(private val announcer: Announcer = ObjectFactory.createObject(Announcer::class.java),
                          private val policeman: Policeman = ObjectFactory.createObject(Policeman::class.java)) {
