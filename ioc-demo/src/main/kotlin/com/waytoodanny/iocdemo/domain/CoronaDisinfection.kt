@@ -12,5 +12,5 @@ class CoronaDisinfection(private val announcer: Announcer = ObjectFactory.create
         announcer.announce("You can risk and come back!")
     }
 
-    private fun disinfection(room: Room) = println("Corona go away!")
+    private fun disinfection(room: Room) = println("Disinfection team: corona go away!")
 }

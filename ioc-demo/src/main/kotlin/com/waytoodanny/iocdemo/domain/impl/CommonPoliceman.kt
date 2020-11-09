@@ -4,5 +4,5 @@ import com.waytoodanny.iocdemo.domain.Policeman
 
 class CommonPoliceman : Policeman {
 
-    override fun makePeopleLeaveRoom() = println("Making people leave room")
+    override fun makePeopleLeaveRoom() = println("Policeman: go out!")
 }

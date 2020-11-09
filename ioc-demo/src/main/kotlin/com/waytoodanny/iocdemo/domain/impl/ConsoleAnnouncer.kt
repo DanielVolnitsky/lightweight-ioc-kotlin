@@ -4,5 +4,5 @@ import com.waytoodanny.iocdemo.domain.Announcer
 
 class ConsoleAnnouncer : Announcer {
 
-    override fun announce(message: String) = println(message)
+    override fun announce(message: String) = println("Announcer: $message")
 }
