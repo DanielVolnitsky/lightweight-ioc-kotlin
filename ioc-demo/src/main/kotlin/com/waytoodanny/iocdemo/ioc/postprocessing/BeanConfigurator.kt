@@ -1,5 +1,5 @@
 package com.waytoodanny.iocdemo.ioc.postprocessing
 
-interface BeanConfigurer {
+interface BeanConfigurator {
     fun configure(bean: Any)
 }

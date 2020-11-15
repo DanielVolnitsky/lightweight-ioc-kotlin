@@ -4,8 +4,8 @@ import com.waytoodanny.iocdemo.domain.Policeman
 import com.waytoodanny.iocdemo.domain.impl.CommonPoliceman
 import com.waytoodanny.iocdemo.ioc.config.Config
 import com.waytoodanny.iocdemo.ioc.config.JavaConfig
-import com.waytoodanny.iocdemo.ioc.postprocessing.BeanConfigurer
-import com.waytoodanny.iocdemo.ioc.postprocessing.impl.InjectPropertyAnnotationBeanConfigurer
+import com.waytoodanny.iocdemo.ioc.postprocessing.BeanConfigurator
+import com.waytoodanny.iocdemo.ioc.postprocessing.impl.InjectPropertyAnnotationBeanConfigurator
 
 object ObjectFactory {
 
@@ -13,15 +13,20 @@ object ObjectFactory {
             "com.waytoodanny",
             mutableMapOf(Policeman::class.java to CommonPoliceman::class.java)
     )
-    private val beanConfigurers: List<BeanConfigurer> = listOf(InjectPropertyAnnotationBeanConfigurer())
+    private val BEAN_CONFIGURATORS: List<BeanConfigurator> = listOf(InjectPropertyAnnotationBeanConfigurator())
 
     fun <T> createObject(type: Class<T>): T {
-        val implClass: Class<out T> = when (type.isInterface) {
+        return beanImplementation(type).let { impl ->
+            impl.getDeclaredConstructor().newInstance().apply {
+                BEAN_CONFIGURATORS.forEach { bc -> bc.configure(this as Any) }
+            }
+        }
+    }
+
+    private fun <T> beanImplementation(type: Class<T>): Class<out T> {
+        return when (type.isInterface) {
             true -> config.getImplClass(type)
             false -> type
         }
-        val originalBean: T = implClass.getDeclaredConstructor().newInstance()
-        beanConfigurers.forEach { bc -> bc.configure(originalBean as Any) }
-        return originalBean
     }
 }

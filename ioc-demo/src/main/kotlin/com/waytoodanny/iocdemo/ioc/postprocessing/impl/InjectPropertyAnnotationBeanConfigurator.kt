@@ -1,22 +1,22 @@
 package com.waytoodanny.iocdemo.ioc.postprocessing.impl
 
 import com.waytoodanny.iocdemo.ioc.annotation.InjectProperty
-import com.waytoodanny.iocdemo.ioc.postprocessing.BeanConfigurer
+import com.waytoodanny.iocdemo.ioc.postprocessing.BeanConfigurator
 import java.net.URI
 import java.nio.file.Files
 import java.nio.file.Path
 import kotlin.streams.asSequence
 
-class InjectPropertyAnnotationBeanConfigurer : BeanConfigurer {
+class InjectPropertyAnnotationBeanConfigurator : BeanConfigurator {
 
     private val properties: Map<String, String>
 
     init {
-        val propertiesURL: URI =
+        val propertiesURI: URI =
                 ClassLoader.getSystemClassLoader().getResource("application.properties")?.toURI()
                         ?: throw RuntimeException("No 'application.properties' found")
 
-        val fileLines = propertiesURL.let { Path.of(it) }.let { Files.lines(it) }.asSequence()
+        val fileLines = propertiesURI.let { Path.of(it) }.let { Files.lines(it) }.asSequence()
         this.properties = fileLines.associate { it.split("=").let { (k, v) -> k to v } }
     }
 
