@@ -1,5 +1,6 @@
 package com.waytoodanny.iocdemo.ioc.config
 
+import com.waytoodanny.iocdemo.ioc.postprocessing.BeanConfigurator
 import org.reflections.Reflections
 
 class JavaConfig(packageToScan: String,
@@ -19,4 +20,9 @@ class JavaConfig(packageToScan: String,
         @Suppress("UNCHECKED_CAST")
         return beanImplClass as Class<T>
     }
+
+    override fun beanConfigurators(): List<BeanConfigurator> =
+            scanner.getSubTypesOf(BeanConfigurator::class.java)
+                    .asIterable()
+                    .map { c -> c.getDeclaredConstructor().newInstance() }
 }

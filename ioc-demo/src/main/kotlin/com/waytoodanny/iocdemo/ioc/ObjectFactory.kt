@@ -5,7 +5,6 @@ import com.waytoodanny.iocdemo.domain.impl.CommonPoliceman
 import com.waytoodanny.iocdemo.ioc.config.Config
 import com.waytoodanny.iocdemo.ioc.config.JavaConfig
 import com.waytoodanny.iocdemo.ioc.postprocessing.BeanConfigurator
-import com.waytoodanny.iocdemo.ioc.postprocessing.impl.InjectPropertyAnnotationBeanConfigurator
 
 object ObjectFactory {
 
@@ -13,7 +12,7 @@ object ObjectFactory {
             "com.waytoodanny",
             mutableMapOf(Policeman::class.java to CommonPoliceman::class.java)
     )
-    private val BEAN_CONFIGURATORS: List<BeanConfigurator> = listOf(InjectPropertyAnnotationBeanConfigurator())
+    private val BEAN_CONFIGURATORS: List<BeanConfigurator> = config.beanConfigurators()
 
     fun <T> createObject(type: Class<T>): T {
         return beanImplementation(type).let { impl ->
