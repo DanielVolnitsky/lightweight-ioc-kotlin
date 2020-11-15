@@ -2,7 +2,9 @@ package com.waytoodanny.iocdemo.domain.impl
 
 import com.waytoodanny.iocdemo.domain.Advertisement
 import com.waytoodanny.iocdemo.ioc.annotation.InjectProperty
+import com.waytoodanny.iocdemo.ioc.annotation.Singleton
 
+@Singleton
 class AlcoholAdvertisement : Advertisement {
 
     @field:InjectProperty

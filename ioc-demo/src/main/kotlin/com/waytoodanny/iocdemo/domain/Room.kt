@@ -1,4 +1,3 @@
 package com.waytoodanny.iocdemo.domain
 
-class Room {
-}
+class Room

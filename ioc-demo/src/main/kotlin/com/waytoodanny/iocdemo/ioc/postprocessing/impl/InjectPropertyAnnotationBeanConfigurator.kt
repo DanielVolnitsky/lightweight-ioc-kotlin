@@ -1,5 +1,6 @@
 package com.waytoodanny.iocdemo.ioc.postprocessing.impl
 
+import com.waytoodanny.iocdemo.ioc.ApplicationContext
 import com.waytoodanny.iocdemo.ioc.annotation.InjectProperty
 import com.waytoodanny.iocdemo.ioc.postprocessing.BeanConfigurator
 import java.net.URI
@@ -20,7 +21,7 @@ class InjectPropertyAnnotationBeanConfigurator : BeanConfigurator {
         this.properties = fileLines.associate { it.split("=").let { (k, v) -> k to v } }
     }
 
-    override fun configure(bean: Any) {
+    override fun configure(bean: Any, context: ApplicationContext) {
         bean.javaClass.declaredFields.forEach { field ->
             field.getAnnotation(InjectProperty::class.java)?.let { annotation ->
                 val value = if (annotation.value.isNotEmpty()) properties[annotation.value] else properties[field.name]
