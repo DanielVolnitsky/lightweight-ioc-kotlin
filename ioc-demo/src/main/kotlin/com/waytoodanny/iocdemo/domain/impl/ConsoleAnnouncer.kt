@@ -11,6 +11,8 @@ class ConsoleAnnouncer : Announcer {
     @InjectBean
     private var advertisement: Advertisement? = null
 
+    fun init(): Unit = println(this::class.toString() + " init method execution")
+
     override fun announce(message: String) {
         advertisement!!.advertise()
         println("Announcer: $message")
