@@ -8,15 +8,17 @@ import com.waytoodanny.iocdemo.ioc.Application
 import org.springframework.boot.autoconfigure.SpringBootApplication
 
 @SpringBootApplication
-class IocDemoApplication
+class IocDemoApplication {
 
-fun main(args: Array<String>) {
-    val applicationContext = Application.run(
-            "com.waytoodanny",
-            mutableMapOf(Policeman::class.java to CommonPoliceman::class.java)
-    )
+    fun main() {
+        val applicationContext = Application.run(
+                "com.waytoodanny",
+                mutableMapOf(Policeman::class.java to CommonPoliceman::class.java)
+        )
 
-    applicationContext
-            .getObject(CoronaDisinfection::class.java)
-            .start(Room())
+        applicationContext
+                .getObject(CoronaDisinfection::class.java)
+                .start(Room())
+    }
 }
+
